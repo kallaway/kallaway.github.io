@@ -1,5 +1,40 @@
+/* ///////////////////////// BASE STYLES //////////////////////// */
+
+body {
+  background-color: #E4F9F5;
+  color: #40514E;
+}
+
+/* COLORS: http://colorhunt.co/c/14832
+#E4F9F5
+#30E3CA
+#11999E
+#40514E
+ */
+
+section {
+  margin: 0 auto;
+  width: 60%;
+  text-align: center;
+}
+
+/* ///////////////////////// MAIN STYLES //////////////////////// */
+
 #portrait-photo {
   height: 250px;
   width: 250px;
-  margin: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+p#one-line {
+  font-size: 2em;
+}
+
+ul#activities {
+  list-style-type: none;
+}
+
+div#attention {
+  color: #11999E;
 }
