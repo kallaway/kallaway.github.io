@@ -3,6 +3,7 @@
 body {
   background-color: #E4F9F5;
   color: #40514E;
+  font-size: 16px;
 }
 
 /* COLORS: http://colorhunt.co/c/14832
@@ -18,23 +19,82 @@ section {
   text-align: center;
 }
 
+ul {
+  list-style-type: none;
+}
+
+a {
+  color: #11999E;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+
+
 /* ///////////////////////// MAIN STYLES //////////////////////// */
 
 #portrait-photo {
-  height: 250px;
-  width: 250px;
+  height: 150px;
+  width: 150px;
   display: block;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50%;
 }
 
 p#one-line {
   font-size: 2em;
 }
 
-ul#activities {
+/*ul#activities {
   list-style-type: none;
+}*/
+
+ul#activities li {
+  display: inline;
+  margin: 10px 10px 0;
 }
 
 div#attention {
   color: #11999E;
+}
+
+.primary {
+  color: #11999E;
+}
+
+/* ///////////////////////// HELPERS //////////////////////// */
+
+.mt1 {
+  margin-top: 5px;
+}
+
+.mt2 {
+  margin-top: 10px;
+}
+
+.mb1 {
+  margin-bottom: 5px;
+}
+
+.mb2 {
+  margin-bottom: 10px;
+}
+
+.ml1 {
+  margin-left: 5px;
+}
+
+.ml2 {
+  margin-left: 10px;
+}
+
+.mr1 {
+  margin-right: 5px;
+}
+.mr2 {
+  margin-right: 10px;
 }
