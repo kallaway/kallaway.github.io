@@ -82,6 +82,19 @@ div#attention {
     color: #11999E;
 }
 
+
+#term-prompt {
+	background-color: #000;
+	border: none;
+	color: #7FF709;
+
+	outline: none;
+}
+/*
+#term-prompt:hover {
+	outline: none;
+}*/
+
 /* ///////////////////////// HELPERS //////////////////////// */
 
 .mt1 {
