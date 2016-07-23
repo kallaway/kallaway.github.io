@@ -1,9 +1,17 @@
 $(document).ready(function() {
 
+	let wakeUp = "Wake up, Neo...";
+	let knock = "Knock, knock, Neo...";
+	let nameOccupation = 'Alexander Kallaway, Front End Developer';
+	let writeCode = "I write code";
+	let learnMore = "Learn more";
+	// let
+
 	let shortBio = '> Self-taught web developer, absolutely passionate about coding and the future of technology. I am constantly learning and expanding my skills. While you are reading this, I am probably busy learning something new. I am interested in habit development, language learning (currently French), startups.';
 	let typeSpeed = 50; // in ms
 
 	var autotype = function(el, text, i, interval) {
+		// $(el).append("> ");
 		if (i < text.length) {
 			$(el).append(text[i++]);
 			setTimeout(function () { autotype(el, text, i, interval); }, interval);
@@ -24,8 +32,19 @@ $(document).ready(function() {
 		}
 	}
 
+	function createAndAutofillEl() {
+
+	}
+
 	function init() {
+
+		let p = ('<p id="wakeup"></p>').addClass("term-result");
 		autotype('#name', '> Alexander Kallaway, Front End Developer', 0, typeSpeed);
+
+
+		autotype('#name', '> Alexander Kallaway, Front End Developer', 0, typeSpeed);
+
+		// autotype('#name', '> Alexander Kallaway, Front End Developer', 0, typeSpeed);
 		// make "I write code" to be text first, and then change it to link?
 		// autotype('#profession', '> Front End Developer', 0, typeSpeed);
 
