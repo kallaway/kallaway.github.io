@@ -5,10 +5,24 @@ $(document).ready(function() {
 	let nameOccupation = 'Alexander Kallaway, Front End Developer';
 	let writeCode = "I write code";
 	let learnMore = "Learn more";
+	let listCommands = "Available commands: [skills] [contact]";
 	// let
 
+	let list = "For a list of all possible commands, type 'help'";
+
+	let $terminal = $('#terminal');
+
 	let shortBio = '> Self-taught web developer, absolutely passionate about coding and the future of technology. I am constantly learning and expanding my skills. While you are reading this, I am probably busy learning something new. I am interested in habit development, language learning (currently French), startups.';
-	let typeSpeed = 50; // in ms
+	let typeSpeed = 75; // in ms
+
+	// var autotype = function(el, text, i, interval) {
+	// 	// $(el).append("> ");
+	// 	if (i < text.length) {
+	// 		$(el).append(text[i++]);
+	// 		setTimeout(function () { autotype(el, text, i, interval); }, interval);
+	// 	}
+	// 	return $(el);
+	// };
 
 	var autotype = function(el, text, i, interval) {
 		// $(el).append("> ");
@@ -19,14 +33,24 @@ $(document).ready(function() {
 		return $(el);
 	};
 
-	var handleInput = function() {
-		let value = $('#term-prompt').text();
+	// IsAutotype is Bool
+	function addToTerminal(text, isAutotype) {
+		let $el = $('<p class="term-ouput"></p>').text('> ').appendTo($terminal);
+		autotype($el, text, 0, typeSpeed);
+		return $el;
+	}
 
+	var handleInput = function() {
+		let value = $('#term-prompt').val();
+		alert("Value is: " + value);
 
 		switch (value) {
 			case "whois":
 				// add a div that
 				// have a function that creates and appends certan elements to the pages
+			case "help":
+				alert("help is working!");
+				let newTest = addToTerminal("Here is a list of commands", true);
 			default:
 				console.log("I don't understand, please choose between these options:");
 		}
@@ -37,14 +61,12 @@ $(document).ready(function() {
 	}
 
 	function init() {
+		let wakeupEl = addToTerminal(wakeUp, true);
+		let nameEl = addToTerminal(nameOccupation, true);
+		let listEl = addToTerminal(list, true);
 
-		let p = ('<p id="wakeup"></p>').addClass("term-result");
-		autotype('#name', '> Alexander Kallaway, Front End Developer', 0, typeSpeed);
+		$('#term-prompt').html('&#9612;');
 
-
-		autotype('#name', '> Alexander Kallaway, Front End Developer', 0, typeSpeed);
-
-		// autotype('#name', '> Alexander Kallaway, Front End Developer', 0, typeSpeed);
 		// make "I write code" to be text first, and then change it to link?
 		// autotype('#profession', '> Front End Developer', 0, typeSpeed);
 
@@ -60,8 +82,11 @@ $(document).ready(function() {
 		$("#abilities").show();
 	});
 
-	$('#term-prompt').on("keypress", function() {
+	$('#term-prompt').on("keypress", function(e) {
 		// preventDefault(); // ???
+		if (e.which == 13) {
+			handleInput();
+		}
 	})
 
 	init();

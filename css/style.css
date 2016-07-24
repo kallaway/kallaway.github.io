@@ -38,10 +38,19 @@ a:hover {
 }
 
 /* ///////////////////////// MAIN STYLES //////////////////////// */
-
-#general-info {
-    margin-top: 100px;
+#terminal {
+	margin: 0 auto 2%;
+    width: 40%;
+	margin-top: 100px;
 }
+
+
+
+
+
+/*#general-info {
+    margin-top: 100px;
+}*/
 #portrait-photo {
     height: 150px;
     width: 150px;
