@@ -21,7 +21,7 @@ h1, h2, p {
 
 section {
     margin: 0 auto 2%;
-    width: 40%;
+    width: 50%;
     /*text-align: center;*/
 }
 ul {
@@ -40,12 +40,15 @@ a:hover {
 /* ///////////////////////// MAIN STYLES //////////////////////// */
 #terminal {
 	margin: 0 auto 2%;
-    width: 40%;
+    width: 50%;
 	margin-top: 100px;
 }
 
 
-
+#general-info,
+.learn {
+	display: none;
+}
 
 
 /*#general-info {
@@ -91,6 +94,9 @@ div#attention {
     color: #11999E;
 }
 
+#terminal-line {
+	display: none;
+}
 
 #term-prompt {
 	background-color: #000;
@@ -98,6 +104,8 @@ div#attention {
 	color: #7FF709;
 
 	outline: none;
+	margin-bottom: 300px;
+	/*display: none;*/
 }
 /*
 #term-prompt:hover {
