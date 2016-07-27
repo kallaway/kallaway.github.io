@@ -13,7 +13,9 @@ $(document).ready(function() {
 	learnMore = "Learn more",
 	quote = "There is no spoon.",
 	listCommands = 'Available commands: [about] [bio] [clear] [contact] [skills] [social] [quote]',
-	commandNotFound = 'Command not found.';
+	commandNotFound = 'Command not found.',
+	skills = "Main: HTLM5, CSS3, AngularJS, D3, GIT and Github.\n Familiar with: ReactJS, Haxe, OpenFL, Python, THREE.js, Node.js.",
+	contact = "Contact me on Twitter -> @ka11away";
 	// let
 
 	let quotes = [
@@ -35,18 +37,28 @@ $(document).ready(function() {
 	function generateContactHTML() {
 		let contact = $('<ul id="abilities"></ul>');
 
-		let vrettaHTML = $('<li></li>').append()
+		let github = $("<li><li>");
+
+		let githubLink = $("<a>Github</a>").attr({
+			"href": "https://github.com/kallaway/",
+			"target": "_blank"
+		});
+
+		github.append(githubLink);
+
+		contact.append(github);
+
+		return contact;
+
+		// <li><i class="fa fa-github"></i> <a href="https://github.com/kallaway/" target="_blank">build</a></li>
+
+		// let vrettaHTML = $('<li></li>').append()
 	}
 
 	function generateSkillHTML() {
-		let skills = $('<div id="skills">
-			<p>> list skill</p>
-			<p>> where &lt;skill&gt; is one of:<skill>
-			<p class="subresult">HTLM5, CSS3, AngularJS, D3, GIT and Github, </p>
-		</div>
-		<div id="familiar">
-			<p>> list familiar area:</p>
-			<p>> where &lt;area&gt; is one of:</p><p class="subresult">Haxe, OpenFL, Python, THREE.js, Node.js</p></div>')
+		let skillsFullOne = $('<div id="skills"></div>');
+
+		let skillsFull = $('<div id="skills"><p>> list skill</p><p>> where &lt;skill&gt; is one of:<skill><p class="subresult">HTLM5, CSS3, AngularJS, D3, GIT and Github, </p></div><div id="familiar"><p>> list familiar area:</p><p>> where &lt;area&gt; is one of:</p><p class="subresult">Haxe, OpenFL, Python, THREE.js, Node.js</p></div>')
 	}
 
 	// <li><i class="fa fa-suitcase"></i> <a href="https://www.vretta.com/" target="_blank">work</a></li>
@@ -66,11 +78,16 @@ $(document).ready(function() {
 	};
 
 	// IsAutotype is Bool
-
 	// isHTML or not
 
 	function clearTerminal() {
 		$('.term-output').remove();
+	}
+
+	function addHTMLToTerminal(html) {
+		let $el = $('<p class="term-output"></p>').appendTo($terminal);
+
+		$el.append(html);
 	}
 
 	function addToTerminal(text, speed, isAutotype) {
@@ -99,6 +116,9 @@ $(document).ready(function() {
 				clearTerminal();
 				let listEl = addToTerminal(list, typeSpeedFast, true);
 				break;
+			case 'contact':
+				let contactEl = addToTerminal(contact, typeSpeedFast, true);
+				break;
 			case "whois":
 				// add a div that
 				// have a function that creates and appends certan elements to the pages
@@ -111,7 +131,15 @@ $(document).ready(function() {
 				break;
 
 			case 'skills':
-				$('#abilities').show();
+
+				let skillsEl = addToTerminal(skills, typeSpeedFast, false);
+				// generateSkillHTML();
+				// $('#abilities').show();
+				break;
+
+			case 'social':
+				let socialHTML = generateContactHTML();
+				let socialEl = addHTMLToTerminal(socialHTML);
 				break;
 
 			case 'quote':
@@ -145,7 +173,7 @@ $(document).ready(function() {
 			$('#terminal-line').show();
 			$('#term-prompt').focus();
 
-		}, 6000);
+		}, 6500);
 
 		// make "I write code" to be text first, and then change it to link?
 
