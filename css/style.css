@@ -62,7 +62,7 @@ a:hover {
     margin-right: auto;
     border-radius: 50%;
 }
-#short-bio, #online-presence, #abilities {
+#short-bio, #online-presence, #abilities-first {
     display: none;
 }
 .subresult {

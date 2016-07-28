@@ -1,5 +1,7 @@
 // TODO A wall of available commands
 // TODO Run it through Babel (for Safari)
+// TODO Maybe go into the mode of listening to ARROW_UP and ARROW_DOWN when the last result was a list (or a specific option from the available commands)
+// TODO Scroll down to the input automatically
 
 $(document).ready(function() {
 
@@ -23,7 +25,9 @@ $(document).ready(function() {
 		"Follow the white rabbit.",
 		"Don't think you are, know you are.",
 		"There's a difference between knowing the path and walking the path.",
-		"Free your mind"
+		"Free your mind",
+		"I can only show you the door. You're the one that has to walk through it.",
+		"The time has come to make a choice."
 	];
 
 	function getRandomQuote() {
@@ -37,17 +41,27 @@ $(document).ready(function() {
 	function generateContactHTML() {
 		let contact = $('<ul id="abilities"></ul>');
 
-		let github = $("<li><li>");
+		let github = $("<li><li>"); // optimize this
+		let twitter = $("<li></li>");
 
 		let githubLink = $("<a>Github</a>").attr({
 			"href": "https://github.com/kallaway/",
 			"target": "_blank"
 		});
 
+		let twitterLink = $('<a>Twitter</a>').attr({
+			"href": "https://twitter.com/ka11away",
+			"target": "_blank"
+		});
+
 		github.append(githubLink);
+		twitter.append(twitterLink);
 
 		contact.append(github);
+		contact.append(twitter);
 
+		console.log("*** Working with the DOM: contactEl - ");
+		console.log(contact);
 		return contact;
 
 		// <li><i class="fa fa-github"></i> <a href="https://github.com/kallaway/" target="_blank">build</a></li>
@@ -85,9 +99,9 @@ $(document).ready(function() {
 	}
 
 	function addHTMLToTerminal(html) {
-		let $el = $('<p class="term-output"></p>').appendTo($terminal);
+		let $el = $('<p class="term-output"></p>').append(html).appendTo($terminal);
 
-		$el.append(html);
+		// $el.append(html);
 	}
 
 	function addToTerminal(text, speed, isAutotype) {
