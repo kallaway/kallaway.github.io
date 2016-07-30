@@ -1,11 +1,16 @@
+// GOAL: To imitate terminal to the fullest extent possible
+
 // TODO A wall of available commands
 // TODO Run it through Babel (for Safari)
 // TODO Maybe go into the mode of listening to ARROW_UP and ARROW_DOWN when the last result was a list (or a specific option from the available commands)
 // TODO Scroll down to the input automatically
+// TODO On press up, show previous command from history
 
 $(document).ready(function() {
 
 	let $terminal = $('#terminal');
+
+	let termHistory = []; // work with this
 
 	// Text Options
 	let wakeUp = "Wake up, Neo...",
@@ -20,6 +25,8 @@ $(document).ready(function() {
 	contact = "Contact me on Twitter -> @ka11away";
 	// let
 
+	let arrowNavigationMode = false;
+
 	let quotes = [
 		"There is no spoon.",
 		"Follow the white rabbit.",
@@ -27,7 +34,14 @@ $(document).ready(function() {
 		"There's a difference between knowing the path and walking the path.",
 		"Free your mind",
 		"I can only show you the door. You're the one that has to walk through it.",
-		"The time has come to make a choice."
+		"The time has come to make a choice.",
+		"Choi: \"It just sounds to me like you need to unplug, man.",
+		"You've been living in a dream world, Neo.",
+		"What is \"real\"? How do you define \"real\"?",
+		"Welcome to the real world.",
+		"Because you have been down there Neo, you know that road, you know exactly where it ends. And I know that's not where you want to be.",
+		"A déjà vu is usually a glitch in the Matrix. It happens when they change something.",
+		"Do you believe that my being stronger or faster has anything to do with my muscles in this place? Do you think that's air you're breathing now?"
 	];
 
 	function getRandomQuote() {
@@ -41,32 +55,52 @@ $(document).ready(function() {
 	function generateContactHTML() {
 		let contact = $('<ul id="abilities"></ul>');
 
-		let github = $("<li><li>"); // optimize this
-		let twitter = $("<li></li>");
+		let codewars = $('<li></li>');
+		let github = $('<li></li>'); // optimize this
+		let linkedin = $('<li></li>');
+		let twitter = $('<li></li>');
 
-		let githubLink = $("<a>Github</a>").attr({
-			"href": "https://github.com/kallaway/",
-			"target": "_blank"
+
+		let githubLink = $('<a>Github</a>').attr({
+			'href': 'https://github.com/kallaway/',
+			'target': '_blank'
 		});
 
 		let twitterLink = $('<a>Twitter</a>').attr({
-			"href": "https://twitter.com/ka11away",
-			"target": "_blank"
+			'href': 'https://twitter.com/ka11away',
+			'target': '_blank'
 		});
 
+		let codewarsLink = $('<a>Codewars</a>').attr({
+			'href': 'http://www.codewars.com/users/Kallaway',
+			'target': '_blank'
+		});
+
+		let linkedinLink = $('<a>LinkedIn</a>').attr({
+			'href': 'https://ca.linkedin.com/in/kallaway',
+			'target': '_blank'
+		})
+
+		codewars.append(codewarsLink);
 		github.append(githubLink);
+		linkedin.append(linkedinLink);
 		twitter.append(twitterLink);
 
+
+		console.log("$$$ Github element is currently: ");
+		console.log(github);
+
+		contact.append(codewars);
 		contact.append(github);
+		contact.append(linkedin);
 		contact.append(twitter);
+
 
 		console.log("*** Working with the DOM: contactEl - ");
 		console.log(contact);
 		return contact;
 
-		// <li><i class="fa fa-github"></i> <a href="https://github.com/kallaway/" target="_blank">build</a></li>
-
-		// let vrettaHTML = $('<li></li>').append()
+		arrowNavigationMode = true; // change this back after a
 	}
 
 	function generateSkillHTML() {
