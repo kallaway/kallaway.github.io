@@ -5,10 +5,12 @@
 // TODO Maybe go into the mode of listening to ARROW_UP and ARROW_DOWN when the last result was a list (or a specific option from the available commands)
 // TODO Scroll down to the input automatically
 // TODO On press up, show previous command from history
+// TODO If the quote is already being displayed, don't show it and choose a different one.
 
 $(document).ready(function() {
 
 	let $terminal = $('#terminal');
+	let historyDisplayedIndex = -1;
 
 	let termHistory = []; // work with this
 
@@ -19,8 +21,8 @@ $(document).ready(function() {
 	writeCode = "I write code",
 	learnMore = "Learn more",
 	quote = "There is no spoon.",
-	listCommands = 'Available commands: [about] [bio] [clear] [contact] [skills] [social] [quote]',
-	commandNotFound = 'Command not found.',
+	listCommands = 'Available commands: [about] [bio] [clear] [contact] [skills] [social] [portfolio] [quote]',
+	commandNotFound = 'Command not found. Don\'t worry, it\'s probably just a glitch in the Matrix. Gli Glitch in the Matrix trix.',
 	skills = "Main: HTLM5, CSS3, AngularJS, D3, GIT and Github.\n Familiar with: ReactJS, Haxe, OpenFL, Python, THREE.js, Node.js.",
 	contact = "Contact me on Twitter -> @ka11away";
 	// let
@@ -41,7 +43,13 @@ $(document).ready(function() {
 		"Welcome to the real world.",
 		"Because you have been down there Neo, you know that road, you know exactly where it ends. And I know that's not where you want to be.",
 		"A déjà vu is usually a glitch in the Matrix. It happens when they change something.",
-		"Do you believe that my being stronger or faster has anything to do with my muscles in this place? Do you think that's air you're breathing now?"
+		"Do you believe that my being stronger or faster has anything to do with my muscles in this place? Do you think that's air you're breathing now?",
+		"Neo: I know kung fu. \nMorpheus: [eyeing him, hand on chin] Show me.",
+		"Trinity: Neo... nobody has ever done this before. \nNeo: That's why it's going to work.",
+		"Neo: I thought it wasn't real. \nMorpheus: Your mind makes it real.",
+		"The answer is out there, Neo, and it's looking for you, and it will find you if you want it to.",
+		"So what do you need? Besides a miracle.",
+		"I can only show you the door. You're the one that has to walk through it."
 	];
 
 	function getRandomQuote() {
@@ -103,6 +111,22 @@ $(document).ready(function() {
 		arrowNavigationMode = true; // change this back after a
 	}
 
+	function generatePortfolioHTML() {
+		let portfolioContainer = $('<div></div>');
+
+		let portfolioLink = $('<a>here</a>').attr({
+			'href': 'https://codepen.io/kallaway/',
+			'target': '_blank'
+		});
+
+		let portfolioText = "You can see my porfolio of projects live ";
+
+		portfolioContainer.append(portfolioText);
+		portfolioContainer.append(portfolioLink);
+
+		return portfolioContainer;
+	}
+
 	function generateSkillHTML() {
 		let skillsFullOne = $('<div id="skills"></div>');
 
@@ -113,6 +137,7 @@ $(document).ready(function() {
 
 
 	let shortBio = 'Self-taught web developer, absolutely passionate about coding and the future of technology. I am constantly learning and expanding my skills. While you are reading this, I am probably busy learning something new. I am interested in habit development, language learning (currently French), startups.';
+	let typeSpeedSuperFast = 30;
 	let typeSpeedSlow = 75;
 	let typeSpeedFast = 60; // in ms
 
@@ -186,8 +211,14 @@ $(document).ready(function() {
 				break;
 
 			case 'social':
+				// optimize this code and the code below - maybe in a function
 				let socialHTML = generateContactHTML();
 				let socialEl = addHTMLToTerminal(socialHTML);
+				break;
+
+			case 'portfolio':
+				let portfolioHTML = generatePortfolioHTML();
+				let portfolioEl = addHTMLToTerminal(portfolioHTML);
 				break;
 
 			case 'quote':
@@ -196,8 +227,11 @@ $(document).ready(function() {
 				break;
 			default:
 				console.log("I don't understand, please choose between these options:");
-				let commandNotFoundEl = addToTerminal(commandNotFound, typeSpeedFast, false);
-				let unknownEl = addToTerminal(listCommands, typeSpeedFast, false);
+				let commandNotFoundEl = addToTerminal(commandNotFound, typeSpeedSuperFast, true);
+				setTimeout(function() {
+					let unknownEl = addToTerminal(listCommands, typeSpeedFast, false);
+				}, 4000);
+
 		}
 	}
 
@@ -246,14 +280,45 @@ $(document).ready(function() {
 	});
 
 	$('#term-prompt').on("keypress", function(e) {
+		console.log("The button you're currently pressing has a code of " + e.which);
 		// preventDefault(); // ???
-		if (e.which == 13) {
+		// should there be a switch case here?
+		let keyEnter = 13,
+			keyArrowDown = 31, // check if it works for other machines
+			keyArrowUp = 30;
+
+		//
+		if (e.which == keyEnter) {
 			handleInput();
 			// clear the input
+			termHistory.push($('#term-prompt').val());
+			historyDisplayedIndex++;
+			console.log("Now the terminal history is");
+			console.log(termHistory);
+
 			$('#term-prompt').val('');
+
+		}
+
+		// ARROW UP
+		if (e.which == keyArrowUp) {
+			console.log("Arrow Up is pressed");
+			historyDisplayedIndex++;
+			let historyHighlighted = termHistory[historyDisplayedIndex];
+			$('#term-prompt').val(historyHighlighted);
+		}
+
+		// ARROW DOWN
+		if (e.which == keyArrowDown) {
+			console.log("Arrow Down is pressed");
+			historyDisplayedIndex--;
+			let historyHighlighted = termHistory[historyDisplayedIndex];
+			$('#term-prompt').val(historyHighlighted);
 		}
 
 	})
+
+	// $('#term-prompt').on("keypress", function(e))
 
 	init();
 });
