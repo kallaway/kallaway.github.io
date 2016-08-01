@@ -6,6 +6,7 @@
 // TODO Scroll down to the input automatically
 // TODO On press up, show previous command from history
 // TODO If the quote is already being displayed, don't show it and choose a different one.
+// TODO If possible make it so that available commands element is created right after the wrong command is entered.
 
 $(document).ready(function() {
 
@@ -49,7 +50,8 @@ $(document).ready(function() {
 		"Neo: I thought it wasn't real. \nMorpheus: Your mind makes it real.",
 		"The answer is out there, Neo, and it's looking for you, and it will find you if you want it to.",
 		"So what do you need? Besides a miracle.",
-		"I can only show you the door. You're the one that has to walk through it."
+		"I can only show you the door. You're the one that has to walk through it.",
+		"Morpheus: [to Neo who is choosing the red pill] Remember... all I'm offering is the truth. Nothing more."
 	];
 
 	function getRandomQuote() {
@@ -178,7 +180,9 @@ $(document).ready(function() {
 	var handleInput = function() {
 		let value = $('#term-prompt').val();
 
-		switch (value) {
+		console.log("***" + typeof value);
+
+		switch (value.toLowerCase()) {
 			case 'about':
 				let aboutEl = addToTerminal(about, typeSpeedFast, false);
 				break;
@@ -225,11 +229,16 @@ $(document).ready(function() {
 
 				let quoteEl = addToTerminal(getRandomQuote(), typeSpeedFast, false);
 				break;
+
+			case '':
+				break;
 			default:
 				console.log("I don't understand, please choose between these options:");
 				let commandNotFoundEl = addToTerminal(commandNotFound, typeSpeedSuperFast, true);
+				let unknownEl = addToTerminal(listCommands, typeSpeedFast, false);
+				unknownEl
 				setTimeout(function() {
-					let unknownEl = addToTerminal(listCommands, typeSpeedFast, false);
+
 				}, 4000);
 
 		}
@@ -279,19 +288,22 @@ $(document).ready(function() {
 		$("#abilities").show();
 	});
 
-	$('#term-prompt').on("keypress", function(e) {
+	$('#term-prompt').on("keydown", function(e) {
 		console.log("The button you're currently pressing has a code of " + e.which);
 		// preventDefault(); // ???
 		// should there be a switch case here?
 		let keyEnter = 13,
-			keyArrowDown = 31, // check if it works for other machines
-			keyArrowUp = 30;
+			keyArrowDown = 40, // check if it works for other machines
+			keyArrowUp = 38;
 
 		//
 		if (e.which == keyEnter) {
 			handleInput();
 			// clear the input
-			termHistory.push($('#term-prompt').val());
+			if ($('#term-prompt').val() !== "") {
+				termHistory.push($('#term-prompt').val());
+			}
+
 			historyDisplayedIndex++;
 			console.log("Now the terminal history is");
 			console.log(termHistory);
@@ -303,7 +315,15 @@ $(document).ready(function() {
 		// ARROW UP
 		if (e.which == keyArrowUp) {
 			console.log("Arrow Up is pressed");
-			historyDisplayedIndex++;
+
+			if (historyDisplayedIndex > 0) {
+				historyDisplayedIndex--;
+			}
+
+
+			console.log("The index that should have been displayed");
+			console.log(historyDisplayedIndex);
+
 			let historyHighlighted = termHistory[historyDisplayedIndex];
 			$('#term-prompt').val(historyHighlighted);
 		}
@@ -311,7 +331,13 @@ $(document).ready(function() {
 		// ARROW DOWN
 		if (e.which == keyArrowDown) {
 			console.log("Arrow Down is pressed");
-			historyDisplayedIndex--;
+			if (historyDisplayedIndex < termHistory.length) {
+				historyDisplayedIndex++;
+			}
+
+			console.log("The index that should have been displayed");
+			console.log(historyDisplayedIndex);
+
 			let historyHighlighted = termHistory[historyDisplayedIndex];
 			$('#term-prompt').val(historyHighlighted);
 		}
