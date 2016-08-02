@@ -1,10 +1,9 @@
 // GOAL: To imitate terminal to the fullest extent possible
 
 // TODO A wall of available commands
-// TODO Run it through Babel (for Safari)
+// TODO Run it through Babel (for Safari) !!
 // TODO Maybe go into the mode of listening to ARROW_UP and ARROW_DOWN when the last result was a list (or a specific option from the available commands)
 // TODO Scroll down to the input automatically
-// TODO On press up, show previous command from history
 // TODO If the quote is already being displayed, don't show it and choose a different one.
 // TODO If possible make it so that available commands element is created right after the wrong command is entered.
 
@@ -12,6 +11,7 @@ $(document).ready(function() {
 
 	let $terminal = $('#terminal');
 	let historyDisplayedIndex = -1;
+	let lastDisplayedIndex = -1;
 
 	let termHistory = []; // work with this
 
@@ -236,7 +236,7 @@ $(document).ready(function() {
 				console.log("I don't understand, please choose between these options:");
 				let commandNotFoundEl = addToTerminal(commandNotFound, typeSpeedSuperFast, true);
 				let unknownEl = addToTerminal(listCommands, typeSpeedFast, false);
-				unknownEl
+				// unknownEl
 				setTimeout(function() {
 
 				}, 4000);
@@ -298,7 +298,14 @@ $(document).ready(function() {
 
 		//
 		if (e.which == keyEnter) {
-			handleInput();
+			if ($('#term-prompt').val() != termHistory[termHistory.length-1]) {
+				console.log('The input was different from the previous one.');
+				handleInput(); //
+			} else {
+				console.log("This input is the same as previous - it shouldn't be added.");
+			}
+
+
 			// clear the input
 			if ($('#term-prompt').val() !== "") {
 				termHistory.push($('#term-prompt').val());
