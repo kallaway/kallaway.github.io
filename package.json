@@ -1,0 +1,25 @@
+{
+  "name": "kallaway.github.io",
+  "version": "1.0.0",
+  "scripts": {
+    "babel-version": "babel --version"
+  },
+  "devDependencies": {
+	  "babel-cli": "^6.0.0"
+  },
+  "description": "kallaway.github.io",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kallaway/kallaway.github.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kallaway/kallaway.github.io/issues"
+  },
+  "homepage": "https://github.com/kallaway/kallaway.github.io#readme"
+}
