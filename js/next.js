@@ -24,7 +24,7 @@ $(document).ready(function() {
 	quote = "There is no spoon.",
 	listCommands = 'Available commands: [about] [bio] [clear] [contact] [skills] [social] [portfolio] [quote]',
 	commandNotFound = 'Command not found. Don\'t worry, it\'s probably just a glitch in the Matrix. Gli Glitch in the Matrix trix.',
-	skills = "Main: HTML5, CSS3, ReactJS, D3, GIT and Github.\n Familiar with: ReactJS, Haxe, OpenFL, Python, THREE.js, Node.js.",
+	skills = "Main: HTML5, CSS3, ReactJS, D3, GIT and Github.\n Familiar with: Haxe, OpenFL, Python, THREE.js, Node.js.",
 	contact = "Contact me on Twitter -> @ka11away";
 	// let
 
